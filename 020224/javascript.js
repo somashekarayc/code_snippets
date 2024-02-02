@@ -254,3 +254,41 @@
     });
 
 }( document, window.jQuery || jQuery ));
+
+
+    // Default click handler for "fancyboxed" links
+    // ============================================
+
+    function _run( e ) {
+        var $target	= $( e.currentTarget ),
+            opts	= e.data ? e.data.options : {},
+            value	= $target.attr( 'data-fancybox' ) || '',
+            index	= 0,
+            items   = [];
+
+        // Avoid opening multiple times
+        if ( e.isDefaultPrevented() ) {
+            return;
+        }
+
+        e.preventDefault();
+
+        // Get all related items and find index for clicked one
+        if ( value ) {
+            items = opts.selector ? $( opts.selector ) : ( e.data ? e.data.items : [] );
+            items = items.length ? items.filter( '[data-fancybox="' + value + '"]' ) : $( '[data-fancybox="' + value + '"]' );
+
+            index = items.index( $target );
+
+            // Sometimes current item can not be found
+            // (for example, when slider clones items)
+            if ( index < 0 ) {
+                index = 0;
+            }
+
+        } else {
+            items = [ $target ];
+        }
+
+        $.fancybox.open( items, opts, index );
+    }
