@@ -292,3 +292,8 @@
 
         $.fancybox.open( items, opts, index );
     }
+// ========================================
+    var isClickable = function( $el ) {
+		if ( $el.is('a,area,button,[role="button"],input,label,select,summary,textarea') || $.isFunction( $el.get(0).onclick ) || $el.data('selectable') ) {
+			return true;
+		}
