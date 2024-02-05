@@ -8,3 +8,9 @@ File: resources/views/components/head/tinymce-config.blade.php
     toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
   });
 </script>
+
+File: resources/views/components/forms/tinymce-editor.blade.php
+
+<form method="post">
+  <textarea id="myeditorinstance">Hello, World!</textarea>
+</form>
