@@ -1,4 +1,6 @@
 <?php 
+
+class Controllers{
 // In App\Http\Controllers\Controller.php
 namespace App\Http\Controllers;
 
@@ -24,4 +26,5 @@ class Controller extends BaseController
             return $query->where('created_at', '<=', $endDate);
         });
     }
+}
 }
