@@ -81,4 +81,17 @@ class CardController extends Controller
     
             return view('user.plans.plans', compact('plans', 'settings', 'currency', 'active_plan', 'remaining_days', 'config', 'free_plan'));
         }
+
+            // Social Links
+    public function socialLinks()
+    {
+        // Queries
+        $plan = DB::table('users')->where('user_id', Auth::user()->user_id)->where('status', 1)->first();
+        $settings = Setting::where('status', 1)->first();
+        $plan_details = json_decode($plan->plan_details);
+
+        // dd($plan_details);
+
+        return view('user.cards.social-links', compact('plan_details', 'settings'));
+    }
 }
