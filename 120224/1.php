@@ -56,4 +56,29 @@ class CardController extends Controller
             return redirect()->route('user.plans');
         }
     }
+
+        // Plans
+        public function plans()
+        {
+            // Queries
+            $plans = DB::table('plans')->where('is_private', 0)->where('status', 1)->get();
+            $config = DB::table('config')->get();
+            $free_plan = Transaction::where('user_id', Auth::user()->id)->where('transaction_amount', '0')->count();
+            $plan = User::where('user_id', Auth::user()->user_id)->first();
+            $active_plan = json_decode($plan->plan_details);
+            $settings = Setting::where('status', 1)->first();
+            $currency = Currency::where('iso_code', $config[1]->config_value)->first();
+            $remaining_days = 0;
+    
+            // Check active plan in user
+            if (isset($active_plan)) {
+    
+                // Get plan validity into current date (remaining days)
+                $plan_validity = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', Auth::user()->plan_validity);
+                $current_date = Carbon::now();
+                $remaining_days = $current_date->diffInDays($plan_validity, false);
+            }
+    
+            return view('user.plans.plans', compact('plans', 'settings', 'currency', 'active_plan', 'remaining_days', 'config', 'free_plan'));
+        }
 }
