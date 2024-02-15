@@ -86,5 +86,34 @@
 <div class="thumbnails"></div>
 
 </div>
+
+<script>
+        const slideGallery = document.querySelector('.slides');
+        const slides = slideGallery.querySelectorAll('div');
+        const slideCount = slides.length;
+        const slideHeight = 920;
+        const marginTop = 16;
+
+
+
+        const scrollToElement = el => {
+            const index = parseInt(el.dataset.id, 10);
+            slideGallery.scrollTo(0, index * slideHeight + marginTop);
+        };
+
+        document.querySelector('.thumbnails').innerHTML += [...slides]
+            .map(
+                (slide, i) => `<img src="${slide.querySelector('img').src}" data-id="${i}">`
+            )
+            .join('');
+
+        document.querySelectorAll('.thumbnails img').forEach(el => {
+            el.addEventListener('click', () => scrollToElement(el));
+        });
+
+        slideGallery.addEventListener('scroll', e => scrollThumb());
+
+        scrollThumb();
+    </script>
 </body>
 </html>
