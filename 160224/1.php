@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,28 +66,29 @@
         }
     </style>
 </head>
+
 <body>
-<div class="gallery-container">
+    <div class="gallery-container">
 
-<div class="slides">
-    <div><img src="https://picsum.photos/id/1067/540/540"></div>
-    <div><img src="https://picsum.photos/id/122/540/540"></div>
-    <div><img src="https://picsum.photos/id/188/540/540"></div>
-    <div><img src="https://picsum.photos/id/249/540/540"></div>
-    <div><img src="https://picsum.photos/id/257/540/540"></div>
-    <div><img src="https://picsum.photos/id/259/540/540"></div>
-    <div><img src="https://picsum.photos/id/283/540/540"></div>
-    <div><img src="https://picsum.photos/id/288/540/540"></div>
-    <div><img src="https://picsum.photos/id/299/540/540"></div>
-</div>
-<div class="scrollbar">
-    <div class="thumb"></div>
-</div>
-<div class="thumbnails"></div>
+        <div class="slides">
+            <div><img src="https://picsum.photos/id/1067/540/540"></div>
+            <div><img src="https://picsum.photos/id/122/540/540"></div>
+            <div><img src="https://picsum.photos/id/188/540/540"></div>
+            <div><img src="https://picsum.photos/id/249/540/540"></div>
+            <div><img src="https://picsum.photos/id/257/540/540"></div>
+            <div><img src="https://picsum.photos/id/259/540/540"></div>
+            <div><img src="https://picsum.photos/id/283/540/540"></div>
+            <div><img src="https://picsum.photos/id/288/540/540"></div>
+            <div><img src="https://picsum.photos/id/299/540/540"></div>
+        </div>
+        <div class="scrollbar">
+            <div class="thumb"></div>
+        </div>
+        <div class="thumbnails"></div>
 
-</div>
-    
-<script>
+    </div>
+
+    <script>
         const slideGallery = document.querySelector('.slides');
         const slides = slideGallery.querySelectorAll('div');
         const slideCount = slides.length;
@@ -116,4 +118,5 @@
     </script>
 
 </body>
+
 </html>
