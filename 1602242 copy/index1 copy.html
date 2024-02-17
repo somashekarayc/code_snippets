@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="dash-sidebar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li class="menu collapsed">
+          <a>Submenu 1</a>
+          <ul class="submenu">
+            <li><a href="index1.html">Submenu Item 1</a></li>
+            <li><a href="#section2">Submenu Item 2</a></li>
+          </ul>
+        </li>
+        <li class="menu collapsed">
+          <a>Submenu 2</a>
+          <ul class="submenu">
+            <li><a href="#section3">Submenu Item 1</a></li>
+            <li><a href="#section4">Submenu Item 2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div id="content">
+      <!-- Content goes here -->
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+      const hash = window.location.hash.substring(1);
+
+      if (hash) {
+        // Expand submenu based on hash on page load
+        const target = $('a[href="#' + hash + '"]');
+        target.parent("li.menu").toggleClass("collapsed");
+        target.parent("li.menu").siblings(".submenu").slideToggle();
+      }
+
+      $(document).ready(function () {
+        // Your existing click functionality here
+        $("li.menu > a").click(function () {
+          $(this).parent().toggleClass("collapsed");
+          $(this).siblings(".submenu").slideToggle();
+        });
+
+        // Expand submenu on hash change or popstate events
+        window.addEventListener("popstate", function () {
+          const newHash = window.location.hash.substring(1);
+          if (newHash) {
+            const target = $('a[href="#' + newHash + '"]');
+            target.parent("li.menu").toggleClass("collapsed");
+            target.parent("li.menu").siblings(".submenu").slideToggle();
+          }
+        });
+
+        window.addEventListener("hashchange", function () {
+          const newHash = window.location.hash.substring(1);
+          if (newHash) {
+            const target = $('a[href="#' + newHash + '"]');
+            target.parent("li.menu").toggleClass("collapsed");
+            target.parent("li.menu").siblings(".submenu").slideToggle();
+          }
+        });
+
+        // Add event listener for click on anchor links with hash
+        $("a[href^='#']").click(function () {
+          const newHash = this.hash.substring(1);
+          if (newHash) {
+            const target = $('a[href="#' + newHash + '"]');
+            target.parent("li.menu").toggleClass("collapsed");
+            target.parent("li.menu").siblings(".submenu").slideToggle();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

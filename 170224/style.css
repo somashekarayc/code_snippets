@@ -1,0 +1,83 @@
+.dashboard-sidebar {
+    /* Use descriptive and consistent IDs and classes */
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .sidebar-nav-wrapper {
+    /* Descriptive class */
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding-left: 20px;
+  }
+  
+  .sidebar-content {
+    overflow-y: auto;
+    height: calc(100% - 60px);
+  }
+  
+  .sidebar-nav {
+    /* Consistent naming */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-item {
+    /* Use "nav-item" class consistently */
+    border-top: 1px solid #ddd;
+  }
+  
+  .nav-item:first-child {
+    border-top: none;
+  }
+  
+  .nav-link {
+    /* Consistent naming */
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    background-color: #ddd;
+  }
+  
+  .submenu {
+    /* No hyphen in "submenu" */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .submenu li {
+    border-top: none;
+  }
+  
+  /* Added CSS for submenu expansion/collapse (assumptions made): */
+  .submenu {
+    display: none; /* Submenus hidden by default */
+  }
+  
+  .nav-item.expanded .submenu {
+    display: block; /* Show submenu for expanded items */
+  }
+  
+  .nav-item.expanded .nav-link {
+    /* Add visual cue for expanded items, e.g., background or arrow */
+    background-color: #eee;
+    /* Optionally add an arrow: */
+    /* background-position: center right; */
+    /* background-repeat: no-repeat; */
+    /* background-image: url('arrow.png'); */
+  }
+  
+  /* Consider adding CSS transitions for smooth expansion/collapse effects */
+  

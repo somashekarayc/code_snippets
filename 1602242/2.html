@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="dash-sidebar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li class="menu collapsed">
+                <a>Submenu 1</a>
+                <ul class="submenu">
+                    <li><a href="#section1">Submenu Item 1</a></li>
+                    <li><a href="#section2">Submenu Item 2</a></li>
+                </ul>
+            </li>
+            <li class="menu collapsed">
+                <a>Submenu 2</a>
+                <ul class="submenu">
+                    <li><a href="#section3">Submenu Item 1</a></li>
+                    <li><a href="#section4">Submenu Item 2</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="content">
+        <!-- Content goes here -->
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+    // Click event for collapsing/expanding submenu
+    $("li.menu > a").click(function () {
+        $(this).parent().toggleClass("collapsed");
+        $(this).siblings(".submenu").slideToggle();
+    });
+
+    // Handle clicks on submenu items
+    $("#dash-sidebar").on("click", ".submenu a", function (e) {
+        // e.preventDefault(); // Prevent default link behavior
+
+        // Expand parent submenu
+        var $submenu = $(this).closest(".submenu");
+        $submenu.slideDown();
+
+        // Expand parent menu
+        var $menu = $submenu.parent(".menu");
+        $menu.removeClass("collapsed");
+
+        // Scroll to the target section
+        var target = $(this).attr("href");
+        $('html, body').animate({
+            scrollTop: $(target).offset().top
+        }, 500);
+
+        // Remove active class from all links
+        $("#dash-sidebar ul li a").removeClass("active");
+        // Add active class to the clicked link
+        $(this).addClass("active");
+    });
+
+    // Expand submenu based on hash in URL
+    if (window.location.hash) {
+        var hash = window.location.hash;
+        var $target = $('a[href="' + hash + '"]');
+        $target.closest(".submenu").slideDown();
+        $target.closest(".menu").removeClass("collapsed");
+        // Add active class to the target link
+        $target.addClass("active");
+    }
+});
+
+    </script>
+</body>
+
+
+</html>
