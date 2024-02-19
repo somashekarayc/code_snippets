@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading Progress Bar</title>
+
+    <style>
+/* -------------------------------- 
+
+File#: _1_reading-progressbar
+Title: Reading Progress Bar
+Descr: A bar indicator displaying the current reading progress
+Usage: codyhouse.co/license
+
+-------------------------------- */
+/* reset */
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+* {
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  background-color: hsl(0, 0%, 100%);
+  font-family: system-ui, sans-serif;
+  color: hsl(230, 7%, 23%);
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.2;
+  color: hsl(230, 13%, 9%);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.0736rem;
+}
+
+h2 {
+  font-size: 1.728rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+ol, ul, menu {
+  list-style: none;
+}
+
+button, input, textarea, select {
+  background-color: transparent;
+  border-radius: 0;
+  color: inherit;
+  line-height: inherit;
+  appearance: none;
+}
+
+textarea {
+  resize: vertical;
+  overflow: auto;
+  vertical-align: top;
+}
+
+a {
+  color: hsl(250, 84%, 54%);
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+@media (min-width: 64rem) {
+  body {
+    font-size: 1.25rem;
+  }
+
+  h1 {
+    font-size: 3.051rem;
+  }
+
+    h2 {
+    font-size: 2.44rem;
+  }
+
+    h3 {
+    font-size: 1.75rem;
+  }
+
+    h4 {
+    font-size: 1.5625rem;
+  }
+}
+
+/* variables */
+:root {
+  /* colors */
+  --rw5-color-primary-hsl: 250, 84%, 54%;
+  --rw5-color-bg-hsl: 0, 0%, 100%;
+  --rw5-color-contrast-high-hsl: 230, 7%, 23%;
+  --rw5-color-contrast-higher-hsl: 230, 13%, 9%;
+  --rw5-color-accent-hsl: 342, 89%, 48%;
+  --rw5-color-contrast-lower-hsl: 240, 4%, 85%;
+
+  /* spacing */
+  --rw5-space-md: 1.25rem;
+  --rw5-space-lg: 2rem;
+  --rw5-space-sm: 0.75rem;
+  --rw5-space-xs: 0.5rem;
+
+  /* typography */
+  --rw5-text-sm: 0.833rem;
+}
+
+@media(min-width: 64rem){
+  :root {
+    /* spacing */
+    --rw5-space-md: 2rem;
+    --rw5-space-lg: 3.125rem;
+    --rw5-space-sm: 1.125rem;
+    --rw5-space-xs: 0.75rem;
+
+    /* typography */
+    --rw5-text-sm: 1rem;
+  }
+}
+
+/* component */
+.reading-progressbar {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  color: hsl(var(--rw5-color-primary-hsl));
+  pointer-events: none;
+  display: none;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+.reading-progressbar--is-out {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+.reading-progressbar--is-active {
+  display: block;
+}
+
+.reading-progressbar::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+.reading-progressbar::-webkit-progress-value {
+  background-color: currentColor;
+}
+
+.reading-progressbar::-moz-progress-bar {
+  background-color: currentColor;
+}
+
+.reading-progressbar__fallback {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: currentColor;
+}
+
+/* utility classes */
+.rw5-article {
+  --rw5-heading-line-height: 1.22;
+  --rw5-body-line-height: 1.66;
+  --rw5-space-multiplier: 1.2;
+}
+
+.rw5-text-component :where(h1, h2, h3, h4) {
+  line-height: var(--rw5-heading-line-height, 1.2);
+  margin-top: calc(var(--rw5-space-md) * var(--rw5-space-multiplier, 1));
+  margin-bottom: calc(var(--rw5-space-sm) * var(--rw5-space-multiplier, 1));
+}
+
+.rw5-text-component :where(p, blockquote, ul li, ol li) {
+  line-height: var(--rw5-body-line-height, 1.4);
+}
+
+.rw5-text-component :where(ul, ol, p, blockquote, .rw5-text-component__block) {
+  margin-bottom: calc(var(--rw5-space-sm) * var(--rw5-space-multiplier, 1));
+}
+
+.rw5-text-component :where(ul, ol) {
+  padding-left: 1.25em;
+}
+
+.rw5-text-component ul :where(ul, ol), .rw5-text-component ol :where(ul, ol) {
+  padding-left: 1em;
+  margin-bottom: 0;
+}
+
+.rw5-text-component ul {
+  list-style-type: disc;
+}
+
+.rw5-text-component ol {
+  list-style-type: decimal;
+}
+
+.rw5-text-component img {
+  display: block;
+  margin: 0 auto;
+}
+
+.rw5-text-component figcaption {
+  margin-top: calc(var(--rw5-space-xs) * var(--rw5-space-multiplier, 1));
+  font-size: var(--rw5-text-sm);
+  text-align: center;}
+
+.rw5-text-component em {
+  font-style: italic;
+}
+
+.rw5-text-component strong {
+  font-weight: bold;
+}
+
+.rw5-text-component s {
+  text-decoration: line-through;
+}
+
+.rw5-text-component u {
+  text-decoration: underline;
+}
+
+.rw5-text-component mark {
+  background-color: hsla(var(--rw5-color-accent-hsl), 0.2);
+  color: inherit;
+}
+
+.rw5-text-component blockquote {
+  padding-left: 1em;
+  border-left: 4px solid hsl(var(--rw5-color-contrast-lower-hsl));
+  font-style: italic;
+}
+
+.rw5-text-component hr {
+  margin: calc(var(--rw5-space-md) * var(--rw5-space-multiplier, 1)) auto;
+  background: hsl(var(--rw5-color-contrast-lower-hsl));
+  height: 1px;
+}
+
+.rw5-text-component > *:first-child {
+  margin-top: 0;
+}
+
+.rw5-text-component > *:last-child {
+  margin-bottom: 0;
+}
+
+.rw5-text-component.rw5-line-height-xs {
+  --rw5-heading-line-height: 1;
+  --rw5-body-line-height: 1.1;
+}
+
+.rw5-text-component.rw5-line-height-sm {
+  --rw5-heading-line-height: 1.1;
+  --rw5-body-line-height: 1.2;
+}
+
+.rw5-text-component.rw5-line-height-md {
+  --rw5-heading-line-height: 1.15;
+  --rw5-body-line-height: 1.4;
+}
+
+.rw5-text-component.rw5-line-height-lg {
+  --rw5-heading-line-height: 1.22;
+  --rw5-body-line-height: 1.58;
+}
+
+.rw5-text-component.rw5-line-height-xl {
+  --rw5-heading-line-height: 1.3;
+  --rw5-body-line-height: 1.72;
+}
+
+.rw5-padding-y-lg {
+  padding-top: var(--rw5-space-lg);
+  padding-bottom: var(--rw5-space-lg);
+}
+
+.rw5-max-width-sm {
+  max-width: 48rem;
+}
+
+.rw5-container {
+  width: calc(100% - 2*var(--rw5-space-md));
+  margin-left: auto;
+  margin-right: auto;
+}
+    </style>
+  </head>
+  <body>
+    <progress
+      aria-hidden="true"
+      class="reading-progressbar js-reading-progressbar"
+      max="100"
+      value="0"
+    >
+      <div
+        class="reading-progressbar__fallback js-reading-progressbar__fallback"
+      ></div>
+    </progress>
+
+    <div class="rw5-container rw5-max-width-sm rw5-padding-y-lg">
+      <article class="rw5-text-component rw5-article js-reading-content">
+        <h1>Reading Indicator</h1>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A vitae
+          atque minima, quam voluptatem saepe deleniti, at numquam in commodi,
+          quae possimus dicta sit magnam quasi vel repudiandae ea sunt est
+          sapiente maiores. Eius quo quos amet dignissimos quam vero incidunt
+          aut magnam, inventore eos eum provident, velit perferendis tempore.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ad
+          veniam accusamus ea dolore quasi quod illo, delectus magnam nihil
+          harum doloremque ratione dolores, fugiat sint sequi id, sed non.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et iure
+          iste, voluptatum repellendus! Consequatur quos tenetur suscipit
+          perspiciatis nesciunt, hic non quod magnam ullam aliquid, quas. Velit,
+          architecto, laborum! Labore numquam rem sint, cum itaque ut aperiam,
+          ad veniam ea earum, saepe ipsam magnam adipisci tempora neque quidem
+          voluptatibus ab quod magni hic? Unde libero sapiente iure, numquam
+          officia soluta!
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
+          perspiciatis distinctio quis facere atque saepe odio a, perferendis
+          similique error?
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A vitae
+          atque minima, quam voluptatem saepe deleniti, at numquam in commodi,
+          quae possimus dicta sit magnam quasi vel repudiandae ea sunt est
+          sapiente maiores. Eius quo quos amet dignissimos quam vero incidunt
+          aut magnam, inventore eos eum provident, velit perferendis tempore.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ad
+          veniam accusamus ea dolore quasi quod illo, delectus magnam nihil
+          harum doloremque ratione dolores, fugiat sint sequi id, sed non.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et iure
+          iste, voluptatum repellendus! Consequatur quos tenetur suscipit
+          perspiciatis nesciunt, hic non quod magnam ullam aliquid, quas. Velit,
+          architecto, laborum! Labore numquam rem sint, cum itaque ut aperiam,
+          ad veniam ea earum, saepe ipsam magnam adipisci tempora neque quidem
+          voluptatibus ab quod magni hic? Unde libero sapiente iure, numquam
+          officia soluta!
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
+          perspiciatis distinctio quis facere atque saepe odio a, perferendis
+          similique error?
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A vitae
+          atque minima, quam voluptatem saepe deleniti, at numquam in commodi,
+          quae possimus dicta sit magnam quasi vel repudiandae ea sunt est
+          sapiente maiores. Eius quo quos amet dignissimos quam vero incidunt
+          aut magnam, inventore eos eum provident, velit perferendis tempore.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ad
+          veniam accusamus ea dolore quasi quod illo, delectus magnam nihil
+          harum doloremque ratione dolores, fugiat sint sequi id, sed non.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et iure
+          iste, voluptatum repellendus! Consequatur quos tenetur suscipit
+          perspiciatis nesciunt, hic non quod magnam ullam aliquid, quas. Velit,
+          architecto, laborum! Labore numquam rem sint, cum itaque ut aperiam,
+          ad veniam ea earum, saepe ipsam magnam adipisci tempora neque quidem
+          voluptatibus ab quod magni hic? Unde libero sapiente iure, numquam
+          officia soluta!
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
+          perspiciatis distinctio quis facere atque saepe odio a, perferendis
+          similique error?
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
+          perspiciatis distinctio quis facere atque saepe odio a, perferendis
+          similique error?
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A vitae
+          atque minima, quam voluptatem saepe deleniti, at numquam in commodi,
+          quae possimus dicta sit magnam quasi vel repudiandae ea sunt est
+          sapiente maiores. Eius quo quos amet dignissimos quam vero incidunt
+          aut magnam, inventore eos eum provident, velit perferendis tempore.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ad
+          veniam accusamus ea dolore quasi quod illo, delectus magnam nihil
+          harum doloremque ratione dolores, fugiat sint sequi id, sed non.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et iure
+          iste, voluptatum repellendus! Consequatur quos tenetur suscipit
+          perspiciatis nesciunt, hic non quod magnam ullam aliquid, quas. Velit,
+          architecto, laborum! Labore numquam rem sint, cum itaque ut aperiam,
+          ad veniam ea earum, saepe ipsam magnam adipisci tempora neque quidem
+          voluptatibus ab quod magni hic? Unde libero sapiente iure, numquam
+          officia soluta!
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
+          perspiciatis distinctio quis facere atque saepe odio a, perferendis
+          similique error?
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A vitae
+          atque minima, quam voluptatem saepe deleniti, at numquam in commodi,
+          quae possimus dicta sit magnam quasi vel repudiandae ea sunt est
+          sapiente maiores. Eius quo quos amet dignissimos quam vero incidunt
+          aut magnam, inventore eos eum provident, velit perferendis tempore.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ad
+          veniam accusamus ea dolore quasi quod illo, delectus magnam nihil
+          harum doloremque ratione dolores, fugiat sint sequi id, sed non.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et iure
+          iste, voluptatum repellendus! Consequatur quos tenetur suscipit
+          perspiciatis nesciunt, hic non quod magnam ullam aliquid, quas. Velit,
+          architecto, laborum! Labore numquam rem sint, cum itaque ut aperiam,
+          ad veniam ea earum, saepe ipsam magnam adipisci tempora neque quidem
+          voluptatibus ab quod magni hic? Unde libero sapiente iure, numquam
+          officia soluta!
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
+          perspiciatis distinctio quis facere atque saepe odio a, perferendis
+          similique error?
+        </p>
+      </article>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+      // utility functions
+      var Util = {};
+
+      Util.addClass = function (el, className) {
+        var classList = className.split(" ");
+        $(el).addClass(classList[0]);
+        if (classList.length > 1)
+          Util.addClass(el, classList.slice(1).join(" "));
+      };
+
+      Util.removeClass = function (el, className) {
+        var classList = className.split(" ");
+        $(el).removeClass(classList[0]);
+        if (classList.length > 1)
+          Util.removeClass(el, classList.slice(1).join(" "));
+      };
+
+      Util.toggleClass = function (el, className, bool) {
+        if (bool) Util.addClass(el, className);
+        else Util.removeClass(el, className);
+      };
+
+      // File#: _1_reading-progressbar
+      // Usage: codyhouse.co/license
+      $(document).ready(function () {
+        var readingIndicator = $(".js-reading-progressbar"),
+          readingIndicatorContent = $(".js-reading-content");
+
+        if (readingIndicator.length > 0 && readingIndicatorContent.length > 0) {
+          var progressInfo = [],
+            progressEvent = false,
+            progressFallback = readingIndicator.find(
+              ".js-reading-progressbar__fallback"
+            ),
+            progressIsSupported = "value" in readingIndicator[0];
+
+          var boundingClientRect =
+            readingIndicatorContent[0].getBoundingClientRect();
+
+          progressInfo["height"] = readingIndicatorContent.outerHeight();
+          progressInfo["top"] = boundingClientRect.top;
+          progressInfo["bottom"] = boundingClientRect.bottom;
+          progressInfo["window"] = $(window).height();
+          progressInfo["class"] = "reading-progressbar--is-active";
+          progressInfo["hideClass"] = "reading-progressbar--is-out";
+
+          //init indicator
+          setProgressIndicator();
+          // wait for font to be loaded - reset progress bar
+          if (document.fonts) {
+            document.fonts.ready.then(function () {
+              triggerReset();
+            });
+          }
+          // listen to window resize - update progress
+          $(window).resize(function () {
+            triggerReset();
+          });
+
+          //listen to the window scroll event - update progress
+          $(window).scroll(function () {
+            if (progressEvent) return;
+            progressEvent = true;
+            !window.requestAnimationFrame
+              ? setTimeout(function () {
+                  setProgressIndicator();
+                }, 250)
+              : window.requestAnimationFrame(setProgressIndicator);
+          });
+
+          function setProgressIndicator() {
+            var boundingClientRect =
+              readingIndicatorContent[0].getBoundingClientRect();
+            progressInfo["top"] = boundingClientRect.top;
+            progressInfo["bottom"] = boundingClientRect.bottom;
+
+            if (progressInfo["height"] <= progressInfo["window"]) {
+              // short content - hide progress indicator
+              Util.removeClass(readingIndicator, progressInfo["class"]);
+              progressEvent = false;
+              return;
+            }
+            // get new progress and update element
+            Util.addClass(readingIndicator, progressInfo["class"]);
+            var value =
+              progressInfo["top"] >= 0
+                ? 0
+                : (100 * (0 - progressInfo["top"])) /
+                  (progressInfo["height"] - progressInfo["window"]);
+            readingIndicator.attr("value", value);
+            if (!progressIsSupported && progressFallback.length > 0)
+              progressFallback.css("width", value + "%");
+            // hide progress bar when target is outside the viewport
+            Util.toggleClass(
+              readingIndicator,
+              progressInfo["hideClass"],
+              progressInfo["bottom"] <= 0
+            );
+            progressEvent = false;
+          }
+
+          function triggerReset() {
+            if (progressEvent) return;
+            progressEvent = true;
+            !window.requestAnimationFrame
+              ? setTimeout(function () {
+                  resetProgressIndicator();
+                }, 250)
+              : window.requestAnimationFrame(resetProgressIndicator);
+          }
+
+          function resetProgressIndicator() {
+            progressInfo["height"] = readingIndicatorContent.outerHeight();
+            progressInfo["window"] = $(window).height();
+            setProgressIndicator();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
