@@ -7,10 +7,7 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-// Include PHPMailer autoloader
-// require 'path/to/PHPMailer/src/SMTP.php';
-// mail.appshop.tech|587|support@appshop.tech|sp@2023app
-// mail.lacalle.cl|587|jenniffer@lacalle.cl|Jenny2006!
+
 // SMTP Configuration
 $smtpHost = 'mail.lacalle.cl';
 $smtpUsername = 'jenniffer@lacalle.cl';
