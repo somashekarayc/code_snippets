@@ -6,9 +6,9 @@ require 'PHPMailer/src/SMTP.php';
 
 
 // SMTP Configuration
-$smtpHost = 'mail.lacalle.cl';
-$smtpUsername = 'jenniffer@lacalle.cl';
-$smtpPassword = 'Jenny2006!';
+$smtpHost = '';
+$smtpUsername = '';
+$smtpPassword = '!';
 $smtpPort = 587; // Adjust port if necessary
 $smtpEncryption = 'tls'; // Options: 'ssl' or 'tls'
 
