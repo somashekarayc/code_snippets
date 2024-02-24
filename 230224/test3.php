@@ -1,45 +1,5 @@
 <?php
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
-
-// require 'PHPMailer/src/Exception.php';
-// require 'PHPMailer/src/PHPMailer.php';
-// require 'PHPMailer/src/SMTP.php';
-
-// function sendMail($name, $email, $phone, $location, $message)
-// {
-//     $mail = new PHPMailer(true);
-
-//     try {
-//         $mail->isSMTP();
-//         $mail->Mailer = "smtp";
-//         $mail->SMTPDebug  = 0;
-//         $mail->Host       = 'mail.1-414.us';
-//         $mail->SMTPAuth   = true;
-//         $mail->Username   = 'jpaul@1-414.us';
-//         $mail->Password   = '1qw2er3ty';
-//         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-//         $mail->Port       = 587;
-
-//         $formcontent = "html code";
-//         $recipient2 = "developer2.onecity@gmail.com";
-//         $subject = "Free consultation lead !";
-
-//         $mail->setFrom('test@gmail.com', 'test2@gmail.com');
-//         $mail->addAddress($recipient2);
-//         $mail->isHTML(true);
-//         $mail->Subject = $subject;
-//         $mail->Body    = $formcontent;
-//         $mail->AltBody = "Name : $name\n Email : $email\nPhone : $phone\nMessage : $message\nLocation : $location";
-
-//         return $mail->Send();
-//     } catch (Exception $e) {
-//         return false;
-//     }
-
-
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
