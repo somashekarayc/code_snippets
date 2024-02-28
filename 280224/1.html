@@ -18,7 +18,43 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                
+                plugins: [
+                    'bold', // Add the Bold plugin
+                    'italic', // Add the Italic plugin
+                    'link', // Add the Link plugin
+                    'image', // Add the Image plugin
+                    'undo', // Add the Undo plugin
+                    'redo', // Add the Redo plugin
+                    'heading', // Add the Heading plugin
+                    'list', // Add the List plugin
+                    'alignment', // Add the Alignment plugin
+                    'fontSize', // Add the Font Size plugin
+                    'fontFamily', // Add the Font Family plugin
+                    'blockquote', // Add the Blockquote plugin
+                    'table', // Add the Table plugin
+                    'horizontalLine', // Add the Horizontal Line plugin
+                    'codeBlock', // Add the Code Block plugin
+                    'math', // Add the Math plugin
+                    'highlight', // Add the Highlight plugin
+                    'indent', // Add the Indent plugin
+                    'subscript', // Add the Subscript plugin
+                    'superscript', // Add the Superscript plugin
+                    'strikethrough', // Add the Strikethrough plugin
+                    'textColor', // Add the Text Color plugin
+                    'backgroundColor', // Add the Background Color plugin
+                    'specialCharacters', // Add the Special Characters plugin
+                    'mediaEmbed' // Add the Media Embed plugin
+                ],
+                toolbar: [
+                    'bold', 'italic', 'link', '|', 'undo', 'redo', '|',
+                    'heading', 'list', '|', 'alignment', '|',
+                    'fontSize', 'fontFamily', '|', 'blockquote', '|',
+                    'table', 'horizontalLine', '|', 'codeBlock', '|',
+                    'math', 'highlight', '|', 'indent', '|',
+                    'subscript', 'superscript', '|', 'strikethrough', '|',
+                    'textColor', 'backgroundColor', '|', 'specialCharacters', '|',
+                    'mediaEmbed'
+                ]
             }
             
             )
