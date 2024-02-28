@@ -1,12 +1,20 @@
 [
     {
-        "name": "user one",
-        "email": "userone@gmail.com",
-        "id": "65dda07d96585"
-    },
-    {
         "name": "user two",
         "email": "usertwo@gmail.com",
-        "id": "65dda0ead148a"
+        "id": "65dda248ec4fc",
+        "model": "users"
+    },
+    {
+        "name": "user theree",
+        "email": "userthree@gmail.com",
+        "model": "users",
+        "id": "65dda3aba0a3d"
+    },
+    {
+        "name": "user four",
+        "email": "userfour@gmail.com",
+        "model": "users",
+        "id": "65dda4644a345"
     }
 ]

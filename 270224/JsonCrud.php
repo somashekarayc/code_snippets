@@ -49,6 +49,7 @@ class JsonCrud {
     }
 
     public function create(array $data): void {
+        $data['model'] = 'users';
         $data['id'] = uniqid(); // Generate unique ID
         $existingData = $this->loadJsonData();
         $existingData[] = $data;
@@ -87,3 +88,33 @@ class JsonCrud {
 }
 
 
+
+// // Example usage
+// try {
+//     $jsonCrud = new JsonCrud('db/data.json'); // Replace with your path
+
+//     // Create
+//     $data = ['name' => 'John Doe', 'email' => 'johndoe@example.com'];
+//     $jsonCrud->create($data);
+    
+
+//     // Read (get all)
+//     $allData = $jsonCrud->getAll();
+//     print_r($allData);
+
+//     // Read (get one)
+//     $id = '123'; // Replace with actual ID
+//     $oneData = $jsonCrud->getOne($id);
+//     print_r($oneData);
+
+//     // Update
+//     $id = '123'; // Replace with actual ID
+//     $updateData = ['email' => 'new_email@example.com'];
+//     $jsonCrud->update($id, $updateData);
+
+//     // Delete
+//     $id = '123'; // Replace with actual ID
+//     $jsonCrud->delete($id);
+// } catch (JsonCrudException $e) {
+//     echo "Error: " . $e->getMessage();
+// }
