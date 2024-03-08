@@ -1,48 +1,41 @@
 <?php
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require 'phpmailer/phpmailer/src/Exception.php';
+require 'phpmailer/phpmailer/src/PHPMailer.php';
+require 'phpmailer/phpmailer/src/SMTP.php';
 
-// SMTP Configuration
-$smtpHost = '';
-$smtpUsername = '';
-$smtpPassword = '!';
-$smtpPort = 587; // Adjust port if necessary
-$smtpEncryption = 'tls'; // Options: 'ssl' or 'tls'
+$to = "developer2.onecity@gmail.com";
 
-// Sender and recipient details
-$fromEmail = 'som@gmail.com';
-$toEmail = 'somsundar98@gmail.com';
-$subject = 'Test Email';
-$message = 'This is a test email sent using PHPMailer with SMTP authentication.';
+$subject = "Your message subject";
 
-// Create a PHPMailer instance
-$mail = new PHPMailer\PHPMailer\PHPMailer();
+$body = "<h3>This is a test email sent using PHPMailer.</h3>
+          <p>This is the body of the email in HTML format.</p>";
 
-// SMTP Configuration
+$mail = new PHPMailer(true);
+
 $mail->isSMTP();
-$mail->Host = $smtpHost;
-$mail->SMTPAuth = true;
-$mail->Username = $smtpUsername;
-$mail->Password = $smtpPassword;
-$mail->SMTPSecure = $smtpEncryption;
-$mail->Port = $smtpPort;
+$mail->Host       = 'smtp.gmail.com';
+$mail->SMTPAuth   = true;
+$mail->Username   = ''; // Your Gmail address
+$mail->Password   = '';  // Your Gmail password
+$mail->SMTPSecure = 'tls';
+$mail->Port       = 587;                   
 
-// Sender and recipient settings
-$mail->setFrom($fromEmail, 'Sender Name');
-$mail->addAddress($toEmail);
+$mail->setFrom('developer1.onecity@gmail.com', 'rajesh');
 
-// Email content
-$mail->isHTML(false);
+$mail->addAddress($to);
+
+$mail->isHTML(true);
 $mail->Subject = $subject;
-$mail->Body = $message;
+$mail->Body    = $body;
 
-// Attempt to send the email
-if ($mail->send()) {
-    echo "Email sent successfully!";
+// Send the email
+if (!$mail->send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    echo "Email sending failed. Error: " . $mail->ErrorInfo;
+    echo "Email sent successfully!";
 }
-?>
+
