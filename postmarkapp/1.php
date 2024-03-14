@@ -16,7 +16,7 @@ $body = '<h3>This is a test email sent using postmarkapp.</h3>
 
 try {
 
-    $client = new PostmarkClient("defc4800-beb3-4804-81ba-59d60850bb18");
+    $client = new PostmarkClient("");
 
     $result = $client->sendEmail(
         from: "Name <jajaxes109@aersm.com>",
