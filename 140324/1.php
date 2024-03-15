@@ -12,7 +12,7 @@ echo longdate(time() - 17 * 24 * 60 * 60);
 echo '<pre>';
 // print_r($GLOBALS);
 // echo '=======================================';
-print_r($_SERVER);
+// print_r($_SERVER);
 // print_r($_COOKIE);
 // print_r($_SESSION);
 // print_r($_REQUEST);
@@ -36,3 +36,12 @@ print_r($_SERVER);
 // $_GET, $_POST, and $_COOKIE.
 // $_ENV Variables passed to the current script via the environment
 // method.
+
+
+// print_r($_SERVER['HTTP_REFERER']);
+
+ $a = 2; $b = 3;
+ if ($a > $b) echo "$a is greater than $b<br>";
+ if ($a < $b) echo "$a is less than $b<br>";
+ if ($a >= $b) echo "$a is greater than or equal to $b<br>";
+ if ($a <= $b) echo "$a is less than or equal to $b<br>";
