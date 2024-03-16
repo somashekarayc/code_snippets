@@ -18,5 +18,23 @@
     <button type="submit" name="submit">Submit</button>
   </form>
 
+  <script>
+    grecaptcha.ready(function() {
+      grecaptcha.execute('<?php echo $siteKey; ?>', { action: 'submit' }) // Optional action for reCAPTCHA v3
+        .then(function(token) {
+          var form = document.getElementById("yourForm");
+          var input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "g-recaptcha-response";
+          input.value = token;
+          form.appendChild(input);
+          // Proceed with form submission
+          form.addEventListener('submit', function(event) {
+            // You can add any additional form validation here if needed
+            return true;
+          });
+        });
+    });
+  </script>
 </body>
 </html>
