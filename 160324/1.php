@@ -2,7 +2,7 @@
 $siteKey = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $action = $_POST['action'] ?? ''; // Optional action for reCAPTCHA v3
+  $action = $_POST['action'] ?? '';
   $token = $_POST['g-recaptcha-response'] ?? '';
 
   if ($token) {
@@ -29,20 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($response) {
       $decodedResponse = json_decode($response);
       if ($decodedResponse->success) {
-        // reCAPTCHA validation successful, proceed with form processing
-        // ... (your form processing logic here)
+        // ... ( form processing logic here)
 
         die('Form submission successful!');
       } else {
-        // Handle failed reCAPTCHA validation (e.g., display an error message)
         die('Failed reCAPTCHA validation.');
       }
     } else {
-      // Handle error during validation request (e.g., display an error message)
       die('Error validating reCAPTCHA.');
     }
   } else {
-    // Handle missing reCAPTCHA token (e.g., display an error message)
     die('Please verify using reCAPTCHA.');
   }
 }
@@ -68,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <script>
     grecaptcha.ready(function() {
-      grecaptcha.execute('<?php echo $siteKey; ?>', { action: 'submit' }) // Optional action for reCAPTCHA v3
+      grecaptcha.execute('<?php echo $siteKey; ?>', { action: 'submit' })
         .then(function(token) {
           var form = document.getElementById("yourForm");
           var input = document.createElement("input");
@@ -76,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           input.name = "g-recaptcha-response";
           input.value = token;
           form.appendChild(input);
-          // Proceed with form submission
           form.addEventListener('submit', function(event) {
             // You can add any additional form validation here if needed
             return true;
