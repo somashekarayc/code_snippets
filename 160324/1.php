@@ -62,6 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit" name="submit">Submit</button>
   </form>
 
+  <div>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis porro consectetur exercitationem temporibus, quam perspiciatis reiciendis rem blanditiis ducimus saepe itaque molestiae laudantium aut a eos! Eligendi nulla cumque laborum!
+  </div>
+
   <script>
     grecaptcha.ready(function() {
       grecaptcha.execute('<?php echo $siteKey; ?>', { action: 'submit' })
