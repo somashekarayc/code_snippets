@@ -1,0 +1,1 @@
+add this class to form element class="recaptcha-v-3"
