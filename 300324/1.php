@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,9 +58,10 @@
         }
     </style>
 </head>
+
 <body>
 
-<header>
+    <header>
         <h1>Your Name</h1>
         <p>Professional Portfolio</p>
     </header>
@@ -68,7 +70,7 @@
         <h2>About Me</h2>
         <p>Welcome to my portfolio website! I am a [Your Profession/Expertise] passionate about [Your Passion/Specialization]. I have [X] years of experience in the field and have worked on various projects ranging from [Mention Project Types]. Feel free to explore my portfolio and get in touch!</p>
     </section>
-    
+
     <section id="portfolio">
         <h2>Portfolio</h2>
         <div>
@@ -94,4 +96,5 @@
         </form>
     </section>
 </body>
+
 </html>
