@@ -1,0 +1,1 @@
+<span aria-hidden="true" class="open-modal cursor-pointer px-2.5 m-3 bg-sky-500 rounded-lg text-black text-2xl/[1rem] hover:bg-gray-100" data-modal-target="exampleModal" data-recipient="View category" data-url="{{ route('category.show', $category->id) }}">&#10063;</span>
