@@ -83,5 +83,15 @@
         </div>
         <!-- Add more projects as needed -->
     </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form action="#" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <input type="submit" value="Send Message">
+        </form>
+    </section>
 </body>
 </html>
