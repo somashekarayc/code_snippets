@@ -69,5 +69,19 @@
         <p>Welcome to my portfolio website! I am a [Your Profession/Expertise] passionate about [Your Passion/Specialization]. I have [X] years of experience in the field and have worked on various projects ranging from [Mention Project Types]. Feel free to explore my portfolio and get in touch!</p>
     </section>
     
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <div>
+            <h3>Project Title 1</h3>
+            <p>Description of Project 1.</p>
+            <p><a href="#">View Project</a></p>
+        </div>
+        <div>
+            <h3>Project Title 2</h3>
+            <p>Description of Project 2.</p>
+            <p><a href="#">View Project</a></p>
+        </div>
+        <!-- Add more projects as needed -->
+    </section>
 </body>
 </html>
