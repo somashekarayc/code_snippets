@@ -58,6 +58,16 @@
     </style>
 </head>
 <body>
+
+<header>
+        <h1>Your Name</h1>
+        <p>Professional Portfolio</p>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Welcome to my portfolio website! I am a [Your Profession/Expertise] passionate about [Your Passion/Specialization]. I have [X] years of experience in the field and have worked on various projects ranging from [Mention Project Types]. Feel free to explore my portfolio and get in touch!</p>
+    </section>
     
 </body>
 </html>
